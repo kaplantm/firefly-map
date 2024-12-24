@@ -115,6 +115,8 @@
     <script>
       // standard global variables
       var container, scene, camera, renderer, controls;
+      var highlightColor = 0xbbd7fb;
+	  var pathHighlightColor = 0xffff00
 
       // custom global variables
       var projector,
@@ -594,8 +596,10 @@
             INTERSECTED = intersects[0].object;
             // store color of closest object (for later restoration)
             INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
+
+            console.log(INTERSECTED.name);
             // set a new color for closest object
-            INTERSECTED.material.color.setHex(0xffff00);
+            INTERSECTED.material.color.setHex(INTERSECTED.name.includes("line") ? pathHighlightColor: highlightColor );
 
             // update text, if it has a "name" field.
             if (intersects[0].object.name) {
@@ -673,7 +677,7 @@
             );
 
             var line = new THREE.Line(geometrySpline, materialSpline);
-            line.name = lineListNames[j] + `_${i}`;
+            line.name = lineListNames[j] + `_${i}line`;
 
             if (showPathSplines == true) {
               scene.add(line);
