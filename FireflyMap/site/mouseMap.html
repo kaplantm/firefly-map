@@ -57,12 +57,12 @@ body{
 <body style="background-color:black;">
 
 
-<script src="https://stemkoski.github.io/Three.js/js/Three.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/Detector.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/OrbitControls.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/THREEx.KeyboardState.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/THREEx.FullScreen.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/THREEx.WindowResize.js"></script>
+<script src="../../dependencies/Three.js"></script>
+<script src="../../dependencies/Detector.js"></script>
+<script src="../../dependencies/OrbitControls.js"></script>
+<script src="../../dependencies/THREEx.KeyboardState.js"></script>
+<script src="../../dependencies/THREEx.FullScreen.js"></script>
+<script src="../../dependencies/THREEx.WindowResize.js"></script>
 
 <link href='http://fonts.googleapis.com/css?family=Tangerine:700' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
@@ -447,7 +447,6 @@ context2.shadowColor="black";
 
 	
 	controls.update();
-	stats.update();
 }
 
 function render() 
@@ -463,7 +462,7 @@ for (var j =0; j <lineListNames.length; j++){
 var geometrySpine = new THREE.Geometry();
 
 var materialSpline = new THREE.LineBasicMaterial({
-    color: lineListColors[j], linewidth: 50
+    color: lineListColors[j], linewidth: 200
 });
 
 
@@ -482,7 +481,7 @@ for(var i = 0; i < splinePoints.length; i++){
 
 
 var line = new THREE.Line(geometrySpine, materialSpline);
-line.scale.set = (3,3,3);
+line.scale.set = (300,300,300);
 line.name = lineListNames[j];
 
 if (showPathSplines == true){
