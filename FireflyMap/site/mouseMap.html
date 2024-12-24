@@ -645,39 +645,49 @@
       }
 
       function displaySplines() {
-        ///SPINES///
-
+		var splineCount = 3;
+		var splineDivisor = .5; // larger number, smaller spacing
+        ///SPLINES///
         for (var j = 0; j < lineListNames.length; j++) {
-          var geometrySpine = new THREE.Geometry();
+      
+          console.log("here 1");
+		  var centerOffset = splineCount/splineDivisor/2
+          var splines = (new Array(splineCount).fill(0)).map((el, k) => new THREE.SplineCurve3([
+            new THREE.Vector3(lineListVector1[j][0], lineListVector1[j][1]+k/splineDivisor-centerOffset, lineListVector1[j][2]),
+            new THREE.Vector3(lineListVector2[j][0], lineListVector2[j][1]+k/splineDivisor-centerOffset, lineListVector2[j][2]),
+            new THREE.Vector3(lineListVector3[j][0], lineListVector3[j][1]+k/splineDivisor-centerOffset, lineListVector3[j][2]),
+          ]));
 
-          var materialSpline = new THREE.LineBasicMaterial({
-            color: lineListColors[j],
-            linewidth: 50,
+          console.log("here 2", splines);
+          splines.forEach((spline, k) => {
+            var geometrySpine = new THREE.Geometry();
+
+            var materialSpline = new THREE.LineBasicMaterial({
+              color: lineListColors[j],
+              linewidth: 50,
+            });
+
+            console.log("here 3", k);
+            var splinePoints = spline.getPoints(numPoints);
+
+            for (var i = 0; i < splinePoints.length; i++) {
+              geometrySpine.vertices.push(splinePoints[i]);
+            }
+
+            var line = new THREE.Line(geometrySpine, materialSpline);
+            line.name = lineListNames[j];
+
+            console.log("here 5", k);
+            if (showPathSplines == true) {
+				console.log("here 6");
+              scene.add(line);
+            }
+
+            if (showPathSplines == false) {
+				console.log("here 7");
+              scene.remove(scene.getObjectByName(line.name));
+            }
           });
-
-          spline = new THREE.SplineCurve3([
-            new THREE.Vector3(lineListVector1[j][0], lineListVector1[j][1], lineListVector1[j][2]),
-            new THREE.Vector3(lineListVector2[j][0], lineListVector2[j][1], lineListVector2[j][2]),
-            new THREE.Vector3(lineListVector3[j][0], lineListVector3[j][1], lineListVector3[j][2]),
-          ]);
-
-          var splinePoints = spline.getPoints(numPoints);
-
-          for (var i = 0; i < splinePoints.length; i++) {
-            geometrySpine.vertices.push(splinePoints[i]);
-          }
-
-          var line = new THREE.Line(geometrySpine, materialSpline);
-          line.scale.set = (3, 3, 3);
-          line.name = lineListNames[j];
-
-          if (showPathSplines == true) {
-            scene.add(line);
-          }
-
-          if (showPathSplines == false) {
-            scene.remove(scene.getObjectByName(line.name));
-          }
         }
       }
       function TogglePaths() {
