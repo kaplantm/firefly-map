@@ -550,9 +550,9 @@
           $(".hidden").animate({ width: "98%" });
           $(".hidden").html(
             "<span id='NameLabel'>" +
-              INTERSECTED.name +
+				getName(INTERSECTED.name)  +
               "</span><br><span id='InfoLabel'>" +
-              textTexture[planetMoonName.indexOf(INTERSECTED.name)] +
+              textTexture[planetMoonName.indexOf(getName(INTERSECTED.name))] +
               "</span>"
           );
           // document.write(INTERSECTED.name)
@@ -599,7 +599,7 @@
             // update text, if it has a "name" field.
             if (intersects[0].object.name) {
               context2.clearRect(0, 0, 1000, 480);
-              var message = intersects[0].object.name;
+              var message = getName(intersects[0].object.name);
               var metrics2 = context2.measureText(message);
               var width2 = metrics2.width * 5;
 
@@ -644,50 +644,35 @@
       }
 
       function displaySplines() {
-        var splineCount = 30;
-        var splineDivisor = 20; // larger number, smaller spacing
-        ///SPLINES///
+        const lineCount = 30;
+
+        ///SPINES///
+
         for (var j = 0; j < lineListNames.length; j++) {
           var materialSpline = new THREE.LineBasicMaterial({
             color: lineListColors[j],
             linewidth: 50,
           });
 
-          var centerOffset = splineCount / splineDivisor / 2;
-          var splines = new Array(splineCount)
-            .fill(0)
-            .map(
-              (el, k) =>
-                new THREE.SplineCurve3([
-                  new THREE.Vector3(
-                    lineListVector1[j][0] + k / splineDivisor - centerOffset,
-                    lineListVector1[j][1] + k / splineDivisor - centerOffset,
-                    lineListVector1[j][2]
-                  ),
-                  new THREE.Vector3(
-                    lineListVector2[j][0] + k / splineDivisor - centerOffset,
-                    lineListVector2[j][1] + k / splineDivisor - centerOffset,
-                    lineListVector2[j][2]
-                  ),
-                  new THREE.Vector3(
-                    lineListVector3[j][0] + k / splineDivisor - centerOffset,
-                    lineListVector3[j][1] + k / splineDivisor - centerOffset,
-                    lineListVector3[j][2]
-                  ),
-                ])
+          spline = new THREE.SplineCurve3([
+            new THREE.Vector3(lineListVector1[j][0], lineListVector1[j][1], lineListVector1[j][2]),
+            new THREE.Vector3(lineListVector2[j][0], lineListVector2[j][1], lineListVector2[j][2]),
+            new THREE.Vector3(lineListVector3[j][0], lineListVector3[j][1], lineListVector3[j][2]),
+          ]);
+
+          var splinePoints = spline.getPoints(numPoints);
+
+          for (var i = 0; i <= lineCount; i++) {
+            const offset = -0.02 * i * Math.pow(-1, i);
+            var geometrySpline = new THREE.Geometry();
+            geometrySpline.vertices.push(
+              ...splinePoints.map(
+                (point) => new THREE.Vector3(point.x, point.y + offset, point.z + offset * Math.pow(-1, i))
+              )
             );
 
-          splines.forEach((spline, k) => {
-            var geometrySpine = new THREE.Geometry();
-
-            var splinePoints = spline.getPoints(numPoints);
-
-            for (var i = 0; i < splinePoints.length; i++) {
-              geometrySpine.vertices.push(splinePoints[i]);
-            }
-
-            var line = new THREE.Line(geometrySpine, materialSpline);
-            line.name = lineListNames[j]+k;
+            var line = new THREE.Line(geometrySpline, materialSpline);
+            line.name = lineListNames[j] + `_${i}`;
 
             if (showPathSplines == true) {
               scene.add(line);
@@ -696,8 +681,12 @@
             if (showPathSplines == false) {
               scene.remove(scene.getObjectByName(line.name));
             }
-          });
+          }
         }
+      }
+
+      function getName(name) {
+        return name.split("_")[0];
       }
       function TogglePaths() {
         showPathSplines = !showPathSplines;
