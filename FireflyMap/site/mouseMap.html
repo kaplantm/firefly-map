@@ -583,7 +583,7 @@
         //		and intersected by the Ray projected from the mouse position
 
         // if there is one (or more) intersections
-        if (intersects.length == 1) {
+        if (intersects.length >= 1) {
           // if the closest object intersected is not the currently stored intersection object
           if (intersects[0].object != INTERSECTED) {
             // restore previous intersection object (if it exists) to its original color
@@ -645,12 +645,16 @@
       }
 
       function displaySplines() {
-		var splineCount = 3;
-		var splineDivisor = .5; // larger number, smaller spacing
+		var splineCount = 30;
+		var splineDivisor = 20; // larger number, smaller spacing
         ///SPLINES///
         for (var j = 0; j < lineListNames.length; j++) {
+			var materialSpline = new THREE.LineBasicMaterial({
+              color: lineListColors[j],
+              linewidth: 50,
+            });
+
       
-          console.log("here 1");
 		  var centerOffset = splineCount/splineDivisor/2
           var splines = (new Array(splineCount).fill(0)).map((el, k) => new THREE.SplineCurve3([
             new THREE.Vector3(lineListVector1[j][0], lineListVector1[j][1]+k/splineDivisor-centerOffset, lineListVector1[j][2]),
@@ -662,11 +666,7 @@
           splines.forEach((spline, k) => {
             var geometrySpine = new THREE.Geometry();
 
-            var materialSpline = new THREE.LineBasicMaterial({
-              color: lineListColors[j],
-              linewidth: 50,
-            });
-
+          
             console.log("here 3", k);
             var splinePoints = spline.getPoints(numPoints);
 
