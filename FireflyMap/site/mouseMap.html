@@ -392,7 +392,7 @@
 
         showPathSplines = false;
         lineListNames = ["Serenity", "The Train Job", "Shindig", "Safe", "Mrs. Reynolds", "Out of Gas", "War Stories"];
-        lineListColors = [0xff0000, 0xff6600, 0xffff00, 0x00ff00, 0x00cccc, 0x00ccff, 0x3366ff, 0x9933ff, 0xff00ff];
+        lineListColors = [0xff0000, 0x00cccc, 0x00ff00, 0xffffff, 0xff5733, 0x00ccff, 0x3366ff, 0x9933ff, 0xff00ff];
         lineListVector1 = [
           [-200, 10, 80],
           [-220, -20, 15],
@@ -645,7 +645,8 @@
       }
 
       function displaySplines() {
-        const lineCount = 30;
+        const lineCount = 100;
+        const radius = 0.75;
 
         ///SPINES///
 
@@ -664,11 +665,10 @@
           var splinePoints = spline.getPoints(numPoints);
 
           for (var i = 0; i <= lineCount; i++) {
-            const offset = -0.02 * i * Math.pow(-1, i);
             var geometrySpline = new THREE.Geometry();
             geometrySpline.vertices.push(
               ...splinePoints.map(
-                (point) => new THREE.Vector3(point.x, point.y + offset, point.z + offset * Math.pow(-1, i))
+                (point) => new THREE.Vector3(point.x, point.y + Math.cos(i) * radius, point.z + Math.sin(i) * radius)
               )
             );
 
