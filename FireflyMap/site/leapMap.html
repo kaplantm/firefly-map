@@ -1,115 +1,152 @@
-
 <html>
   <head>
     <title>Map of the 'Verse</title>
     <style>
-      body{margin: 0px; padding: 0px;}
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
       /*canvas { width: 100%; height: 100%; background-color: black; }*/
-      body{
-  color:white;
-  font-family:"Trebuchet MS";
-  font-style: italic;
-  overflow:hidden;
-  
-}
-.part, .hidden {
-      position:absolute;
-  bottom:10px;
-  left:0px;
-    width: 20px;
-    height: 200px;
-    background: #a73523;
-    display: inline-block;
-    font-size: 24px;
-    text-align: center;
-    vertical-align: top;
-    -moz-border-top-right-radius: 15px;
-    border-top-right-radius: 15px;
-    -moz-border-bottom-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    opacity:.4;
-    padding-top:15px;
-
-}
-#NameLabel {
-  color:rgba(255,232,159,1);
-  font-size:300%;
-  font-family:"Tangerine";
-  font-weight:bolder;
-  font-style: normal;
-  margin-bottom:10px;
-
-}
-#InfoLabel {
-  width:70%;
-  display:block;
-  margin:auto;
-
-}
-.hidden {
-    width: 0px;
-    overflow: hidden;
-}
-canvas{
-  font-family: "Satisfy";
-}
-
+      body {
+        color: white;
+        font-family: "Trebuchet MS";
+        font-style: italic;
+        overflow: hidden;
+      }
+      .part,
+      .hidden {
+        position: absolute;
+        bottom: 10px;
+        left: 0px;
+        width: 20px;
+        height: 200px;
+        background: #a73523;
+        display: inline-block;
+        font-size: 24px;
+        text-align: center;
+        vertical-align: top;
+        -moz-border-top-right-radius: 15px;
+        border-top-right-radius: 15px;
+        -moz-border-bottom-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        opacity: 0.4;
+        padding-top: 15px;
+      }
+      #NameLabel {
+        color: rgba(255, 232, 159, 1);
+        font-size: 300%;
+        font-family: "Tangerine";
+        font-weight: bolder;
+        font-style: normal;
+        margin-bottom: 10px;
+      }
+      #InfoLabel {
+        width: 70%;
+        display: block;
+        margin: auto;
+      }
+      .hidden {
+        width: 0px;
+        overflow: hidden;
+      }
+      canvas {
+        font-family: "Satisfy";
+      }
     </style>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r54/three.js"></script>
     <script src="http://js.leapmotion.com/0.2.0-beta1/leap.min.js"></script>
 
+    <script src="../../dependencies/Three.js"></script>
+    <script src="../../dependencies/Detector.js"></script>
+    <script src="../../dependencies/OrbitControls.js"></script>
+    <script src="../../dependencies/THREEx.KeyboardState.js"></script>
+    <script src="../../dependencies/THREEx.FullScreen.js"></script>
+    <script src="../../dependencies/THREEx.WindowResize.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Tangerine:700" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css" />
+    <script src="../../dependencies/jquery-1.11.2.min.js"></script>
 
-<script src="https://stemkoski.github.io/Three.js/js/Three.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/Detector.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/OrbitControls.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/THREEx.KeyboardState.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/THREEx.FullScreen.js"></script>
-<script src="https://stemkoski.github.io/Three.js/js/THREEx.WindowResize.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-
-<link href='http://fonts.googleapis.com/css?family=Tangerine:700' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
-
+    <link href="http://fonts.googleapis.com/css?family=Tangerine:700" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <div class="logo">
-    <div class="part"></div><div class="hidden"></div><div class="part"></div><div class="hidden"></div>
-</div>
+      <div class="part"></div>
+      <div class="hidden"></div>
+      <div class="part"></div>
+      <div class="hidden"></div>
+    </div>
 
+    <div
+      id="top"
+      style="
+        position: absolute;
+        top: 35px;
+        left: 27%;
+        width: 46%;
+        text-shadow: 0 0 10px #000000;
+        -moz-border-bottom-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        -moz-border-bottom-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        padding: 10px;
+        text-align: center;
+        font-size: 100px;
+        font-family: Tangerine;
+        color: #ffffff;
+      "
+    >
+      Map Of the Verse
+    </div>
 
-    <div id="top" style="position:absolute;top:35px;left:27%;width:46%;text-shadow: 0 0 10px #000000; -moz-border-bottom-right-radius: 15px;border-bottom-right-radius: 15px; -moz-border-bottom-left-radius: 15px;border-bottom-left-radius: 15px;padding:10px;text-align:center;font-size:100px;font-family:Tangerine;color:#ffffff;">Map Of the Verse</div>
-
-<div id="showPaths" onclick="TogglePaths()" style="position:absolute;top:0px;left:0px;background-color:#a73523;width:100%;text-align:center;font-size:25px; opacity:.8;padding:5px 0px 2px 0px;">Toggle Names</div>
+    <div
+      id="showPaths"
+      onclick="TogglePaths()"
+      style="
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color: #a73523;
+        width: 100%;
+        text-align: center;
+        font-size: 25px;
+        opacity: 0.8;
+        padding: 5px 0px 2px 0px;
+      "
+    >
+      Toggle Names
+    </div>
     <script>
-    // standard global variables
+      // standard global variables
 
-var controls;
+      var controls;
 
-var projector, mouse = { x: 0, y: 0 }, INTERSECTED;
+      var projector,
+        mouse = { x: 0, y: 0 },
+        INTERSECTED;
 
-var sprite1;
+      var sprite1;
 
-var canvas, context;
+      var canvas, context;
 
-var lineListName = [];
-var planetMoonName;
-var textTexture;
-var lineListNames;
-var lineListColors;
-var lineListVector1;
-var lineListVector2;
-var lineListVector3;
-var numPoints;
-var showPathSplines;
+      var lineListName = [];
+      var planetMoonName;
+      var textTexture;
+      var lineListNames;
+      var lineListColors;
+      var lineListVector1;
+      var lineListVector2;
+      var lineListVector3;
+      var numPoints;
+      var showPathSplines;
 
-
-        //map function to be used to map values from leap into proper degrees (0-360)
-        function map(value, inputMin, inputMax, outputMin, outputMax){
-        outVal = ((value - inputMin) / (inputMax - inputMin) * (outputMax - outputMin) + outputMin);
-        if(outVal >  outputMax){
+      //map function to be used to map values from leap into proper degrees (0-360)
+      function map(value, inputMin, inputMax, outputMin, outputMax) {
+        outVal = ((value - inputMin) / (inputMax - inputMin)) * (outputMax - outputMin) + outputMin;
+        if (outVal > outputMax) {
           outVal = outputMax;
         }
-        if(outVal <  outputMin){
+        if (outVal < outputMin) {
           outVal = outputMin;
         }
         return outVal;
@@ -121,299 +158,463 @@ var showPathSplines;
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
-
       // create a Directional light as pretend sunshine.
-      directional = new THREE.DirectionalLight( 0xCCCCCC, 1.2 )
-      directional.castShadow = true
-      directional.position.set( 100, 200, 300 )
-      directional.target.position.copy( new THREE.Vector3(0,0,0) )
-      directional.shadowCameraTop     =  1000
-      directional.shadowCameraRight   =  1000
-      directional.shadowCameraBottom  = -1000
-      directional.shadowCameraLeft    = -1000
-      directional.shadowCameraNear    =  600
-      directional.shadowCameraFar     = -600
-      directional.shadowBias          =   -0.0001
-      directional.shadowDarkness      =    0.4
-      directional.shadowMapWidth      = directional.shadowMapHeight = 2048
-      scene.add( directional )
+      directional = new THREE.DirectionalLight(0xcccccc, 1.2);
+      directional.castShadow = true;
+      directional.position.set(100, 200, 300);
+      directional.target.position.copy(new THREE.Vector3(0, 0, 0));
+      directional.shadowCameraTop = 1000;
+      directional.shadowCameraRight = 1000;
+      directional.shadowCameraBottom = -1000;
+      directional.shadowCameraLeft = -1000;
+      directional.shadowCameraNear = 600;
+      directional.shadowCameraFar = -600;
+      directional.shadowBias = -0.0001;
+      directional.shadowDarkness = 0.4;
+      directional.shadowMapWidth = directional.shadowMapHeight = 2048;
+      scene.add(directional);
 
-      window.ambient = new THREE.AmbientLight( 0xFFFFFF )
-      scene.add( ambient )
-  var light = new THREE.PointLight(0xffffff);
-  light.position.set(0,250,0);
-  scene.add(light);
+      window.ambient = new THREE.AmbientLight(0xffffff);
+      scene.add(ambient);
+      var light = new THREE.PointLight(0xffffff);
+      light.position.set(0, 250, 0);
+      scene.add(light);
 
       //earth object
-      var geometry = new THREE.SphereGeometry(1, 1, 1)
-      var material = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture( '' ), ambient: 0x050505, color: 0xFFFFFF, specular: 0x555555} );
-      window.earth = new THREE.Mesh( geometry, material );
+      var geometry = new THREE.SphereGeometry(1, 1, 1);
+      var material = new THREE.MeshPhongMaterial({
+        map: THREE.ImageUtils.loadTexture(""),
+        ambient: 0x050505,
+        color: 0xffffff,
+        specular: 0x555555,
+      });
+      window.earth = new THREE.Mesh(geometry, material);
       scene.add(earth);
 
-  var imagePrefix = "../../media/starrybg4.png";
+      var imagePrefix = "../../media/starrybg4.png";
 
-  var skyGeometry = new THREE.SphereGeometry( 5000, 32, 16 );
-  
-  var materialArray = [];
-  for (var i = 0; i < 6; i++)
-    materialArray.push( new THREE.MeshBasicMaterial({
-      map: THREE.ImageUtils.loadTexture( imagePrefix),
-      side: THREE.BackSide
-    }));
+      var skyGeometry = new THREE.SphereGeometry(5000, 32, 16);
 
-  var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
-  var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
-  scene.add( skyBox );
-  
+      var materialArray = [];
+      for (var i = 0; i < 6; i++)
+        materialArray.push(
+          new THREE.MeshBasicMaterial({
+            map: THREE.ImageUtils.loadTexture(imagePrefix),
+            side: THREE.BackSide,
+          })
+        );
 
-PlanetMoonSize = [20,14,10,10,2,3,3.5,2,1.5,1.5,2,4.5,4,3,2.5,2.5,5,3.5,3,2,2,3,1.5,5,2,7,2,6,
-//red sun above
-2,3,7,5,5,4,3,2.5,2.5,1.5,3,1.5,2,2,3,2,4.5,
-//Kalidasa Above
-3,2,2.5,4,2.5,3,3.5,2,2,2,1.5,4.5,5];
+      var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
+      var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
+      scene.add(skyBox);
 
+      PlanetMoonSize = [
+        20, 14, 10, 10, 2, 3, 3.5, 2, 1.5, 1.5, 2, 4.5, 4, 3, 2.5, 2.5, 5, 3.5, 3, 2, 2, 3, 1.5, 5, 2, 7, 2, 6,
+        //red sun above
+        2, 3, 7, 5, 5, 4, 3, 2.5, 2.5, 1.5, 3, 1.5, 2, 2, 3, 2, 4.5,
+        //Kalidasa Above
+        3, 2, 2.5, 4, 2.5, 3, 3.5, 2, 2, 2, 1.5, 4.5, 5,
+      ];
 
-var planetMoonColors = [0xFFFFFF,0xFFAF00,0xEB3C3C,0xFFE600,
-0x669999,0x66CC66,0x787878,0x6699FF, 0x66CC66,0x99CCFF,0x996600,0x660000,0xFFFFCC,0x9933CC,0x33CCCC,0x663300,0xE6B800,0xFFE270,0x999980,
-//yellowsun above
-0x59775A,0x666699,0x996633,0x669999,0xD1E0E0,0x7D7D7D,0xFFDA47,0x333333,0xE62E2E,
-//red sun above
-0xD6AD33,0x7E9C7E,0x0066CC,0xFFD119,0x53371C,0x00B8E6,0x88725D,0x335833,0x53402D,0x9CB3BD,0x305183,0x005C5C,0xA38E7A,0x847137,0xAB863C,0x805500,0x92BABA,
-//kalidasa above
-0xAB6400,0xBFA47E,0xC94F23,0xBCBDBD,0xBFBFBE,0x1E544F,0x997927,0x547EA6,0x565E65,0x5C431E,0x62605C,0x5F775E,0xE6C418,0xEBCB2A];
+      var planetMoonColors = [
+        0xffffff, 0xffaf00, 0xeb3c3c, 0xffe600, 0x669999, 0x66cc66, 0x787878, 0x6699ff, 0x66cc66, 0x99ccff, 0x996600,
+        0x660000, 0xffffcc, 0x9933cc, 0x33cccc, 0x663300, 0xe6b800, 0xffe270, 0x999980,
+        //yellowsun above
+        0x59775a, 0x666699, 0x996633, 0x669999, 0xd1e0e0, 0x7d7d7d, 0xffda47, 0x333333, 0xe62e2e,
+        //red sun above
+        0xd6ad33, 0x7e9c7e, 0x0066cc, 0xffd119, 0x53371c, 0x00b8e6, 0x88725d, 0x335833, 0x53402d, 0x9cb3bd, 0x305183,
+        0x005c5c, 0xa38e7a, 0x847137, 0xab863c, 0x805500, 0x92baba,
+        //kalidasa above
+        0xab6400, 0xbfa47e, 0xc94f23, 0xbcbdbd, 0xbfbfbe, 0x1e544f, 0x997927, 0x547ea6, 0x565e65, 0x5c431e, 0x62605c,
+        0x5f775e, 0xe6c418, 0xebcb2a,
+      ];
 
-var planetMoonX = [0,-220,180,200,
--240,-200,-270,-220,-190,-195,-180,-220,-310,-250,-300,-180,-120,-130,-295,
-//yellowsun above
-200,160,140,140,220,215,250,180,200,
- //red sun above
-225,270,200,150,145,260,175,201,190,150,170,190,150,201,201,210,235,
-//Kalisa Above
--20,5,30,40,45,5,-60,-70,-40,70,100,85,140];
-var planetMoonY = [0,-20,60,-100,
+      var planetMoonX = [
+        0, -220, 180, 200, -240, -200, -270, -220, -190, -195, -180, -220, -310, -250, -300, -180, -120, -130, -295,
+        //yellowsun above
+        200, 160, 140, 140, 220, 215, 250, 180, 200,
+        //red sun above
+        225, 270, 200, 150, 145, 260, 175, 201, 190, 150, 170, 190, 150, 201, 201, 210, 235,
+        //Kalisa Above
+        -20, 5, 30, 40, 45, 5, -60, -70, -40, 70, 100, 85, 140,
+      ];
+      var planetMoonY = [
+        0, -20, 60, -100,
 
--22,10,-30,-20,-10,-15,15,10,-15,-10,-15,-15,10,8,-30,
-//yellowsunabove
-60,60,65,55,75,65,85,65,65,
-//red sun above
--100,-100,-110,-95,-90,-105,-95,-95,-95,-90,-85,-85,-75,-85,-90,-101,-90,
-//Kalisa Above
-10,-5,-10,5,5,-10,1,0,-5,0,-10,5,15];
+        -22, 10, -30, -20, -10, -15, 15, 10, -15, -10, -15, -15, 10, 8, -30,
+        //yellowsunabove
+        60, 60, 65, 55, 75, 65, 85, 65, 65,
+        //red sun above
+        -100, -100, -110, -95, -90, -105, -95, -95, -95, -90, -85, -85, -75, -85, -90, -101, -90,
+        //Kalisa Above
+        10, -5, -10, 5, 5, -10, 1, 0, -5, 0, -10, 5, 15,
+      ];
 
-var planetMoonZ = [0,40,-30,150,
-45,80,30,15,0,10,40,100,30,20,90,100,90,40,40,
-//yellowsun above
--30,-30,-45,-30,-40,-10,-35,0,20,
-//red sun above
-100,165,245,180,130,145,190,190,165,150,130,130,100,130,120,165,205,
-//Kalisa Above
-50,75,35,-10,-40,-30,-40,0,-10,10,-15,35,0];
+      var planetMoonZ = [
+        0, 40, -30, 150, 45, 80, 30, 15, 0, 10, 40, 100, 30, 20, 90, 100, 90, 40, 40,
+        //yellowsun above
+        -30, -30, -45, -30, -40, -10, -35, 0, 20,
+        //red sun above
+        100, 165, 245, 180, 130, 145, 190, 190, 165, 150, 130, 130, 100, 130, 120, 165, 205,
+        //Kalisa Above
+        50, 75, 35, -10, -40, -30, -40, 0, -10, 10, -15, 35, 0,
+      ];
 
-planetMoonName = ['White Sun','Georgia','Red Sun','Kalidasa',
-'Ezra', 'Boros', 'Prophet','Regina', 'Priam', 'Ithaca', 'Kerry', 'Eiphame', 'Murphy', 'Meadow', 'Newhope', 'Three Hills', 'Daedalus', 'Athens', 'Di Yu',
-//yellowsun above
-'New Melbourne','Jiangyin','Jubilee','Greenleaf','Harvest','St. Albans','Himinbjorg',"Anson's World",'Heinlein',
-//red sun above
-'Salisbury','Beaumonde',"Djinn's Bane",'Penglai','Heaven','Ghost','New Kasmir','Delphi','Constance','Glacier','Verbena','Zephyr','Aberdeen','Angel','Whittier','Vishnu','Zeus',
-//Kalisa Above
-'Rubicon','Valentine','Sihnon','Londinium','Ariel','Liann Jium','Bellerophon','Gonghe','Bernadette','Osiris','Albion','Qui Shi Huang','Lux',"Serenity ","The Train Job ","Shindig ", "Safe ", "Mrs. Reynolds ", "Out of Gas ", "War Stories "];
-textTexture = ['The White Sun is also known as Bai Hu (the White Tiger of the West). It is the central star of the Verse. It is a relatively young star and system. Around this star orbit the Core Planets, which are habitable which were made habitable through terraforming.','Georgia is also known as Huang Long (the Yellow Dragon of the Center). It is the central star of the Georgia system, which contains 12 planets, 42 moons and one protostar. This system orbits the White Sun.','The Red Sun is also known as Zhu Que (the Red Phoenix of the South). It is the coldest of all the suns in the Verse and the central star of the Red Sun system. This system orbits the White Sun and contains 15 planets, 29 moons and 2 protostars.','Kalidasa is also known as Xuan Wu (the Black Tortoise of the North). It is the star of the Kalidasa system that contained the planets Aberdeen, Angel, and Salisbury. It is named after a Sanskrit writer and contains 19 planets, 40 moons, and one protostar.',
+      planetMoonName = [
+        "White Sun",
+        "Georgia",
+        "Red Sun",
+        "Kalidasa",
+        "Ezra",
+        "Boros",
+        "Prophet",
+        "Regina",
+        "Priam",
+        "Ithaca",
+        "Kerry",
+        "Eiphame",
+        "Murphy",
+        "Meadow",
+        "Newhope",
+        "Three Hills",
+        "Daedalus",
+        "Athens",
+        "Di Yu",
+        //yellowsun above
+        "New Melbourne",
+        "Jiangyin",
+        "Jubilee",
+        "Greenleaf",
+        "Harvest",
+        "St. Albans",
+        "Himinbjorg",
+        "Anson's World",
+        "Heinlein",
+        //red sun above
+        "Salisbury",
+        "Beaumonde",
+        "Djinn's Bane",
+        "Penglai",
+        "Heaven",
+        "Ghost",
+        "New Kasmir",
+        "Delphi",
+        "Constance",
+        "Glacier",
+        "Verbena",
+        "Zephyr",
+        "Aberdeen",
+        "Angel",
+        "Whittier",
+        "Vishnu",
+        "Zeus",
+        //Kalisa Above
+        "Rubicon",
+        "Valentine",
+        "Sihnon",
+        "Londinium",
+        "Ariel",
+        "Liann Jium",
+        "Bellerophon",
+        "Gonghe",
+        "Bernadette",
+        "Osiris",
+        "Albion",
+        "Qui Shi Huang",
+        "Lux",
+        "Serenity ",
+        "The Train Job ",
+        "Shindig ",
+        "Safe ",
+        "Mrs. Reynolds ",
+        "Out of Gas ",
+        "War Stories ",
+      ];
+      textTexture = [
+        "The White Sun is also known as Bai Hu (the White Tiger of the West). It is the central star of the Verse. It is a relatively young star and system. Around this star orbit the Core Planets, which are habitable which were made habitable through terraforming.",
+        "Georgia is also known as Huang Long (the Yellow Dragon of the Center). It is the central star of the Georgia system, which contains 12 planets, 42 moons and one protostar. This system orbits the White Sun.",
+        "The Red Sun is also known as Zhu Que (the Red Phoenix of the South). It is the coldest of all the suns in the Verse and the central star of the Red Sun system. This system orbits the White Sun and contains 15 planets, 29 moons and 2 protostars.",
+        "Kalidasa is also known as Xuan Wu (the Black Tortoise of the North). It is the star of the Kalidasa system that contained the planets Aberdeen, Angel, and Salisbury. It is named after a Sanskrit writer and contains 19 planets, 40 moons, and one protostar.",
 
-"Ezra was a planet orbited by Niska's Skyplex and one moon, called Herschel. This planet is mentioned in episode 10, War Stories. Mal Reynolds tried to sell medical supplies here.", 'Boros is a planet after the exodus from Earth-That-Was. There is a heavy Alliance presence here. This planet made an appearance in the pilot episode, Serenity.', 'There is very little information available about Prophet. It is a planet that orbits in the Georgia system and has two moons, Perdido and Dunny.',"The name Regina means 'Queen' in Latin. This is a mining planet, upon which everyone was suffering from a degenerative disease called Bowden's malady. This planet was the site of episode two, 'The Train Job'.", 'Priam is a small planet that orbits Georgia in tandem with Ithaca as a double planet. Very little information is known about this pair.', 'Ithaca is a small planet that orbits Georgia in tandem with Priam as a double planet. Very little information is known about this pair.', 'Kerry is a planet that orbits closely around Georgia. Little is known about this planet and its single moon, Madcap.', "Elphame is a Gas Giant. It is orbited by Summerhouse, Fiddler's Green, Ithendra, Sweethome, and New Vienna.", "Murphy is a protostar, which means that is a sun created from a gas giant using helioforming so that nearby planets are able sustain life. Murphy is orbited by Hera, Aphrodite, Shadow and their moons. Hera was the site of the battle of Serenity Valley, and Shadow was the location of Mal's childhood home.", 'Very little is known about Meadow, which is also known as P/2027(Georgia)07. It remained unterraformed and has two moons, Salyut and Mir, whose names shown Russian influence.', 'Newhope was onces known as P/2027(Georgia)03. It is orbited by three moons: The Commons, Splendor, and Godfors Aken. It was terraformed in 2358 and has a population around 500 million.', 'Three Hill has three moons, New Lafayette, Conrad, Bob. This planet was briefly mentioned in the pilot episode, Serenity, as a possible site to sell stolen wares.', "Daedalus is a Gas Giant orbited by Arvard's Helm, Notterdam, Rea, Box, Illyria, Shenandoah, Dakhla, and Sault. This is little informtion available about this planet.", 'Athens is a planet on the edge of the civilized universe named after the ancient Greek city of Athens. It is the capital of the Georgia system and is orbited by four moons, including Whitefall a planet owned by a woman named Patience, which is the setting of the pilot episode and film, both entitle Serenity. ', 'Di Yu has one moon called Yama. Very little information is known about this planet.',
-//yellowsun above
-'New Melbourne is a planet and a city known for its fishing-oriented economy. It was also a layover point for travellers between the Core and border. Inara was talking about leaving Serenity when they stopped here. New Melbource appearanced in episode fourteen, "Objects in Space"','Jiangyin has cultural dichotomy between townspeople and the hill people, who kidnap skilled workers to support their villages. This was the setting of episode five, "Safe", in which the hill people kipnap Simon to be their doctor, Shepard Book is shot by law enforcement, and River and is accused of witchery.','Very little information is available about Jubilee. It is known to be a medium-sized planet that is has at least one moon by the name of Covenant.',"The world of Greenleaf hosts huge tropical rainforests that yeild unique medicinal plants. Drug companys are the main manufacturer's and employers here. Greenleaf has a significant drug smuggling problem that is being monitored with limited success by the Alliance.","Information about Harvest is very limited. It has two moons, Farraday and Higgins' Moon. Higgin's Moon is the setting of episode seven, Jaynestown. This moon's main export is mud and its people are severely impoverished.","St. Albans is a cold, mountainous planet with one moon known as Pi Gu. This planet is the setting of the latter half of episode twelve, 'The Message'. It is also the home of Private Tracey Smith who fought alongside Mal at the Battle of Serenity Valley.",'Himinbjorg is a Protostar that is orbited by four sub-planet, Aesir, Moab, Brisingamen, Anvil, and their nine collective moons.',"Anson's World host three moons, Spider, Varley and Steele. No additional information is available about this planet.",'A Protostar orbited by Triump, Paquin, Lazarus and Silverhold. Truimph is a tiny planet where people live simple lives away from modernity. This makes the locals vulnerable, so they often hire mercenaries to deter bandits. Mal and crew were hired for this role in episode 6, "Our Mrs. Reynolds."',
-//red sun above
-'Salisbury is a planet with one moon called Lennox. Little of known about the Salisbury, it Lennox is habitable and has a population around 16,000.','Beaumonde is the heavily industrialized capital planet of the Kalidasa system. This planet has a significant pollution problem in air and soil. Only its capital city, New Dunsmuir, is without factorys. Instead, it is a popular tourist destination.',"Djinn's Bane is a gas giants orbited by Illat, Hilal, Hubal, Sin, Ta' Lab, Wadd. Little information is available for these worlds, but it can be assumed that these worlds are unterraformed and uninhabitable.",'Penglai is a protostar orbited by Beylix, Newhall, Oberon, and the Six Sigma Asteroid Swarm and their fourteen collective moons. Newhall is a newly terraformed planet who is seeking immigrants and worker for their water exports and growing tourism industry.','Heaven is a gas giant circled by four unterraformed moons, Urvasi, Manaka, Rambha and Tilottama. These worlds are not well documented and there is little information available.','Ghost is orbited by two moons, Inferno and Xibalia. These worlds are not well documented and there is little information available.','New Kasmir was the setting of an unnamed battles in during which Mal and Zoe witnessed the Alliance use Griswold grenades hidden in apples, which led to them developing a habit of cutting into their fruit before eating.','There is little information available about Delphi or its three moons, Clio, Thalia, and Calliope.','While Constance and its moons Barrowclough and Disraeli, are not mentioned in the show, it is the setting of the 2005 Firefly Comic "Those Left Behind," in which Malcolm Reynolds, Zoë Washburne and Jayne Cobb try a bank heist while Shepherd Book delivers a sermon to act as cover.','Glacier is a chilly planet, as is its moon Denali. Very litle is known about this inhospitable planet.',"Verbena is a poor and undeveloped frontier planet that the Alliance chose as a site for a new gearshift assembly factory for military skiffs. This planet was the focus of an unaired script for an episode that would've been called 'Dead or Alive","Zephyr is an astronomical anomaly, Zephyr occupies Angel's Lagrangian point, which means that its position and gravity is stable relative to Angel and Kalidasa.",'Aberdeen is a rim planet in teh Kalidasa system. It is possibly gamed after an old Scottish City of the same name, or after the hometown of Kurt Cobain (Aberdeen, WA).',"There is little information available about Angel. The planet of Verbana float within its Lagrangian point, so that Verbana is effected equally by Angel and Kalidasa's gravitational pulls.",'Whittier is a small planet with cast oceans. It used to be the site of a huge privately owned fishery. It has one moon, called Ita, which is a location used for experimental terraforming techniques.','Vishnu is a planet with two moons, Ganseha and Rama. Little is known about these terrestrial objects but their names indicate Hindi influences.','Zeus is a gas giant with six orbiting planets, Isabel, Sophie, Victoria, Delynn, Gayle and Betty. There is no additional information about this unterraformed planet.',
-//Kalisa Above
-'Rubicon is a medium-sized terraformed planet with no moons. It was terraformed fairly late and according the to most recent numbers it population is limited to the terraforming crew of 5,000 personnel.','Valentine has a population of over 5 billion people. It is orbited by the moons Selene and Chons. The name Valentine and its moons come from Greek mythology. The names of Valentine, Selene and Chons are derived from Christian, Greek and Egyptian mythology, respectively. ','Sihnon as one of the first two planets terraformed in the White Sun Syste, along with Londinium. It is the seat of Eastern civilization in the White Sun System. Inara trained to be a companion on this planet.','Londinium is considered to be the most similar planet to Earth-That-Was in terms of climate and landscape. The predominant cultures on this planet are European and American. This is the anglo capital of the White Sun System and center of government for the Union of Allied Planets.','Ariel is a highly develope planet with advanced technolgy, medicine and fine dining. This planet appeared in episode 9, "Ariel," in which the crew of Serenity breaks into a hospital to steal medicine.','Lian Jiun has a population over 3.5 billions people. It has two moons, Tiatan and Fu. This planets and these moons have significant Chinese cultural influences.',"Bellerophon is the home of the wealthy. Anything they wanted was shipped in, so they had no need for shops or local labor. This is the home of Durran Heymer, a rich collector of Earth-That-Was artifacts and a laser pistol called the Lassiter, that the Serenity crew tries to steal in episode 11, 'Trash'.","There is little information available about Gonhe, and its one moon, Xing Yun, despite the planet's population of over 2.5 billion people.",'Bernadette and its two moons Nautilus and Spinrad were terraformed in 2240. It is a common launch point for settlers leaving the Central Planets to start new lives in the border worlds. There is also an underground slave trade on the planet where settlers are kidnapped to work on terraforming stations.','The home planet of Simon and River Tam, Osiris is home to rich families and grand universities, but it has signicant crime. Criminals here make use of "blackout zones", where monitoring devices malfunction. A preventative measure to combat crime, even entering the blackout zones can mean arrest. ','Albion and its moon Avalon have a combined population of 2,164,500 people. Their names come from British mythology.','Qui Shi Huang is a protostar orbited by Santo, and its two moons Tethys and New Luxor. Santo is an unsophisticated planet that has blueish gray color. Malcolm Reynolds and Jayne Cobb got into a fight with the slaver Wright and his crew here in episode 4 "Shindig."',"<span style='font-size:75%;'>A protostar orbited by Persephone and Pelorum. Persephone is considered civilized by Alliance standards, but still has a huge slum population. Badger's base of operations at Eavesdown Docks was located here. Simon and River Tam, Shepherd Book, and Lawrence Dobson boarded from here in episode 1, 'Serenity'. This was the site of a duel between Mal and Atherton Wing in episode 4, 'Shindig'.</span>","In the pilot episode of Firefly, the crew travels to Persephone, where they meet with Badger in a failed attempt to sell their goods. They pick up Sheperd Book, Dobson, Simon and River Tam there and then travel to sell their goods to Patience on Whitefall.","The crew takes a job from Adelai Niska from above his skyplex, which orbits around the planet of Ezra. From there they traveled to Regina, on which the major events of 'The Train Job' take place.","This episode opens on Santos with a bar fight, after which the crew departs for Persephone, which the Protostar orbits Lux. They visit Badger, who asks them to attend a party in his place and negotiate a business deal with sir Warwick Harrow", "Serenity land on Jiangyin to deliver a shipment of cattle from Persephone, but the law enforcement gets involved and in Sheperd Book is severely wounded. They take him back to the ship, while elsewhere on the planet, Simon tends to the locals medical needs and River is accused of witchery.", "On Triump, which orbits Heinlein, the crew is hired to protect the locals from bandits. There, Mal accidentally marries Saffron. When the ship then leaves to head for Beaumode, Saffron's hijinx lead them astray. She steers them into an electric net, but they escape and detour to an unknown snowy world.", "In this episode Serenity breaks down and floats through space on their way to Greenleaf. While the rest of the crew evacuates, Mal remains behind to manage the ship. Wounded, oxygen deprived and close to death, his crew returns to save their captain.", "On a space station of unknown location, Mal receives coffin in the mail with the body of Privacy Tracy, who he served in the war. Private Tracy had been trying to fence internal organs on Ariel. He is later killed by a gunshot in a skirmish with the Alliance. The Serenity crew delivers his body home to St. Albans."];
+        "Ezra was a planet orbited by Niska's Skyplex and one moon, called Herschel. This planet is mentioned in episode 10, War Stories. Mal Reynolds tried to sell medical supplies here.",
+        "Boros is a planet after the exodus from Earth-That-Was. There is a heavy Alliance presence here. This planet made an appearance in the pilot episode, Serenity.",
+        "There is very little information available about Prophet. It is a planet that orbits in the Georgia system and has two moons, Perdido and Dunny.",
+        "The name Regina means 'Queen' in Latin. This is a mining planet, upon which everyone was suffering from a degenerative disease called Bowden's malady. This planet was the site of episode two, 'The Train Job'.",
+        "Priam is a small planet that orbits Georgia in tandem with Ithaca as a double planet. Very little information is known about this pair.",
+        "Ithaca is a small planet that orbits Georgia in tandem with Priam as a double planet. Very little information is known about this pair.",
+        "Kerry is a planet that orbits closely around Georgia. Little is known about this planet and its single moon, Madcap.",
+        "Elphame is a Gas Giant. It is orbited by Summerhouse, Fiddler's Green, Ithendra, Sweethome, and New Vienna.",
+        "Murphy is a protostar, which means that is a sun created from a gas giant using helioforming so that nearby planets are able sustain life. Murphy is orbited by Hera, Aphrodite, Shadow and their moons. Hera was the site of the battle of Serenity Valley, and Shadow was the location of Mal's childhood home.",
+        "Very little is known about Meadow, which is also known as P/2027(Georgia)07. It remained unterraformed and has two moons, Salyut and Mir, whose names shown Russian influence.",
+        "Newhope was onces known as P/2027(Georgia)03. It is orbited by three moons: The Commons, Splendor, and Godfors Aken. It was terraformed in 2358 and has a population around 500 million.",
+        "Three Hill has three moons, New Lafayette, Conrad, Bob. This planet was briefly mentioned in the pilot episode, Serenity, as a possible site to sell stolen wares.",
+        "Daedalus is a Gas Giant orbited by Arvard's Helm, Notterdam, Rea, Box, Illyria, Shenandoah, Dakhla, and Sault. This is little informtion available about this planet.",
+        "Athens is a planet on the edge of the civilized universe named after the ancient Greek city of Athens. It is the capital of the Georgia system and is orbited by four moons, including Whitefall a planet owned by a woman named Patience, which is the setting of the pilot episode and film, both entitle Serenity. ",
+        "Di Yu has one moon called Yama. Very little information is known about this planet.",
+        //yellowsun above
+        'New Melbourne is a planet and a city known for its fishing-oriented economy. It was also a layover point for travellers between the Core and border. Inara was talking about leaving Serenity when they stopped here. New Melbource appearanced in episode fourteen, "Objects in Space"',
+        'Jiangyin has cultural dichotomy between townspeople and the hill people, who kidnap skilled workers to support their villages. This was the setting of episode five, "Safe", in which the hill people kipnap Simon to be their doctor, Shepard Book is shot by law enforcement, and River and is accused of witchery.',
+        "Very little information is available about Jubilee. It is known to be a medium-sized planet that is has at least one moon by the name of Covenant.",
+        "The world of Greenleaf hosts huge tropical rainforests that yeild unique medicinal plants. Drug companys are the main manufacturer's and employers here. Greenleaf has a significant drug smuggling problem that is being monitored with limited success by the Alliance.",
+        "Information about Harvest is very limited. It has two moons, Farraday and Higgins' Moon. Higgin's Moon is the setting of episode seven, Jaynestown. This moon's main export is mud and its people are severely impoverished.",
+        "St. Albans is a cold, mountainous planet with one moon known as Pi Gu. This planet is the setting of the latter half of episode twelve, 'The Message'. It is also the home of Private Tracey Smith who fought alongside Mal at the Battle of Serenity Valley.",
+        "Himinbjorg is a Protostar that is orbited by four sub-planet, Aesir, Moab, Brisingamen, Anvil, and their nine collective moons.",
+        "Anson's World host three moons, Spider, Varley and Steele. No additional information is available about this planet.",
+        'A Protostar orbited by Triump, Paquin, Lazarus and Silverhold. Truimph is a tiny planet where people live simple lives away from modernity. This makes the locals vulnerable, so they often hire mercenaries to deter bandits. Mal and crew were hired for this role in episode 6, "Our Mrs. Reynolds."',
+        //red sun above
+        "Salisbury is a planet with one moon called Lennox. Little of known about the Salisbury, it Lennox is habitable and has a population around 16,000.",
+        "Beaumonde is the heavily industrialized capital planet of the Kalidasa system. This planet has a significant pollution problem in air and soil. Only its capital city, New Dunsmuir, is without factorys. Instead, it is a popular tourist destination.",
+        "Djinn's Bane is a gas giants orbited by Illat, Hilal, Hubal, Sin, Ta' Lab, Wadd. Little information is available for these worlds, but it can be assumed that these worlds are unterraformed and uninhabitable.",
+        "Penglai is a protostar orbited by Beylix, Newhall, Oberon, and the Six Sigma Asteroid Swarm and their fourteen collective moons. Newhall is a newly terraformed planet who is seeking immigrants and worker for their water exports and growing tourism industry.",
+        "Heaven is a gas giant circled by four unterraformed moons, Urvasi, Manaka, Rambha and Tilottama. These worlds are not well documented and there is little information available.",
+        "Ghost is orbited by two moons, Inferno and Xibalia. These worlds are not well documented and there is little information available.",
+        "New Kasmir was the setting of an unnamed battles in during which Mal and Zoe witnessed the Alliance use Griswold grenades hidden in apples, which led to them developing a habit of cutting into their fruit before eating.",
+        "There is little information available about Delphi or its three moons, Clio, Thalia, and Calliope.",
+        'While Constance and its moons Barrowclough and Disraeli, are not mentioned in the show, it is the setting of the 2005 Firefly Comic "Those Left Behind," in which Malcolm Reynolds, Zoë Washburne and Jayne Cobb try a bank heist while Shepherd Book delivers a sermon to act as cover.',
+        "Glacier is a chilly planet, as is its moon Denali. Very litle is known about this inhospitable planet.",
+        "Verbena is a poor and undeveloped frontier planet that the Alliance chose as a site for a new gearshift assembly factory for military skiffs. This planet was the focus of an unaired script for an episode that would've been called 'Dead or Alive",
+        "Zephyr is an astronomical anomaly, Zephyr occupies Angel's Lagrangian point, which means that its position and gravity is stable relative to Angel and Kalidasa.",
+        "Aberdeen is a rim planet in teh Kalidasa system. It is possibly gamed after an old Scottish City of the same name, or after the hometown of Kurt Cobain (Aberdeen, WA).",
+        "There is little information available about Angel. The planet of Verbana float within its Lagrangian point, so that Verbana is effected equally by Angel and Kalidasa's gravitational pulls.",
+        "Whittier is a small planet with cast oceans. It used to be the site of a huge privately owned fishery. It has one moon, called Ita, which is a location used for experimental terraforming techniques.",
+        "Vishnu is a planet with two moons, Ganseha and Rama. Little is known about these terrestrial objects but their names indicate Hindi influences.",
+        "Zeus is a gas giant with six orbiting planets, Isabel, Sophie, Victoria, Delynn, Gayle and Betty. There is no additional information about this unterraformed planet.",
+        //Kalisa Above
+        "Rubicon is a medium-sized terraformed planet with no moons. It was terraformed fairly late and according the to most recent numbers it population is limited to the terraforming crew of 5,000 personnel.",
+        "Valentine has a population of over 5 billion people. It is orbited by the moons Selene and Chons. The name Valentine and its moons come from Greek mythology. The names of Valentine, Selene and Chons are derived from Christian, Greek and Egyptian mythology, respectively. ",
+        "Sihnon as one of the first two planets terraformed in the White Sun Syste, along with Londinium. It is the seat of Eastern civilization in the White Sun System. Inara trained to be a companion on this planet.",
+        "Londinium is considered to be the most similar planet to Earth-That-Was in terms of climate and landscape. The predominant cultures on this planet are European and American. This is the anglo capital of the White Sun System and center of government for the Union of Allied Planets.",
+        'Ariel is a highly develope planet with advanced technolgy, medicine and fine dining. This planet appeared in episode 9, "Ariel," in which the crew of Serenity breaks into a hospital to steal medicine.',
+        "Lian Jiun has a population over 3.5 billions people. It has two moons, Tiatan and Fu. This planets and these moons have significant Chinese cultural influences.",
+        "Bellerophon is the home of the wealthy. Anything they wanted was shipped in, so they had no need for shops or local labor. This is the home of Durran Heymer, a rich collector of Earth-That-Was artifacts and a laser pistol called the Lassiter, that the Serenity crew tries to steal in episode 11, 'Trash'.",
+        "There is little information available about Gonhe, and its one moon, Xing Yun, despite the planet's population of over 2.5 billion people.",
+        "Bernadette and its two moons Nautilus and Spinrad were terraformed in 2240. It is a common launch point for settlers leaving the Central Planets to start new lives in the border worlds. There is also an underground slave trade on the planet where settlers are kidnapped to work on terraforming stations.",
+        'The home planet of Simon and River Tam, Osiris is home to rich families and grand universities, but it has signicant crime. Criminals here make use of "blackout zones", where monitoring devices malfunction. A preventative measure to combat crime, even entering the blackout zones can mean arrest. ',
+        "Albion and its moon Avalon have a combined population of 2,164,500 people. Their names come from British mythology.",
+        'Qui Shi Huang is a protostar orbited by Santo, and its two moons Tethys and New Luxor. Santo is an unsophisticated planet that has blueish gray color. Malcolm Reynolds and Jayne Cobb got into a fight with the slaver Wright and his crew here in episode 4 "Shindig."',
+        "<span style='font-size:75%;'>A protostar orbited by Persephone and Pelorum. Persephone is considered civilized by Alliance standards, but still has a huge slum population. Badger's base of operations at Eavesdown Docks was located here. Simon and River Tam, Shepherd Book, and Lawrence Dobson boarded from here in episode 1, 'Serenity'. This was the site of a duel between Mal and Atherton Wing in episode 4, 'Shindig'.</span>",
+        "In the pilot episode of Firefly, the crew travels to Persephone, where they meet with Badger in a failed attempt to sell their goods. They pick up Sheperd Book, Dobson, Simon and River Tam there and then travel to sell their goods to Patience on Whitefall.",
+        "The crew takes a job from Adelai Niska from above his skyplex, which orbits around the planet of Ezra. From there they traveled to Regina, on which the major events of 'The Train Job' take place.",
+        "This episode opens on Santos with a bar fight, after which the crew departs for Persephone, which the Protostar orbits Lux. They visit Badger, who asks them to attend a party in his place and negotiate a business deal with sir Warwick Harrow",
+        "Serenity land on Jiangyin to deliver a shipment of cattle from Persephone, but the law enforcement gets involved and in Sheperd Book is severely wounded. They take him back to the ship, while elsewhere on the planet, Simon tends to the locals medical needs and River is accused of witchery.",
+        "On Triump, which orbits Heinlein, the crew is hired to protect the locals from bandits. There, Mal accidentally marries Saffron. When the ship then leaves to head for Beaumode, Saffron's hijinx lead them astray. She steers them into an electric net, but they escape and detour to an unknown snowy world.",
+        "In this episode Serenity breaks down and floats through space on their way to Greenleaf. While the rest of the crew evacuates, Mal remains behind to manage the ship. Wounded, oxygen deprived and close to death, his crew returns to save their captain.",
+        "On a space station of unknown location, Mal receives coffin in the mail with the body of Privacy Tracy, who he served in the war. Private Tracy had been trying to fence internal organs on Ariel. He is later killed by a gunshot in a skirmish with the Alliance. The Serenity crew delivers his body home to St. Albans.",
+      ];
 
-showPathSplines = false;
-lineListNames = ["Serenity","The Train Job","Shindig", "Safe", "Mrs. Reynolds", "Out of Gas", "War Stories"];
-lineListColors = [0xff0000,0xff6600,0xffff00,0x00ff00,0x00cccc,0x00ccff,0x3366ff,0x9933ff,0xff00ff];
-lineListVector1 = [[-200,10,80],[-220,-20,15],[85,5,35],[140,15,0],[170,-50,105],[220,75,-40],[215,65,-10]];
-lineListVector2 = [[-40,3,70],[-250,-20,30],[110, 10, 15],[150,40,-15],[150,30,120],[190,50,-20],[100,30,20]];
-lineListVector3 = [[140,15,0],[-240,-22,45],[140,15,0],[160,60,-30],[200,65,20],[150,45,-25],[45,5,-40]];
-numPoints = 30;
+      showPathSplines = false;
+      lineListNames = ["Serenity", "The Train Job", "Shindig", "Safe", "Mrs. Reynolds", "Out of Gas", "War Stories"];
+      lineListColors = [0xff0000, 0xff6600, 0xffff00, 0x00ff00, 0x00cccc, 0x00ccff, 0x3366ff, 0x9933ff, 0xff00ff];
+      lineListVector1 = [
+        [-200, 10, 80],
+        [-220, -20, 15],
+        [85, 5, 35],
+        [140, 15, 0],
+        [170, -50, 105],
+        [220, 75, -40],
+        [215, 65, -10],
+      ];
+      lineListVector2 = [
+        [-40, 3, 70],
+        [-250, -20, 30],
+        [110, 10, 15],
+        [150, 40, -15],
+        [150, 30, 120],
+        [190, 50, -20],
+        [100, 30, 20],
+      ];
+      lineListVector3 = [
+        [140, 15, 0],
+        [-240, -22, 45],
+        [140, 15, 0],
+        [160, 60, -30],
+        [200, 65, 20],
+        [150, 45, -25],
+        [45, 5, -40],
+      ];
+      numPoints = 30;
 
-// Osiris','Albion','Qui Shi Huang','Lux'];
-  var moonMoonImage = "../../media/MoonMoon.jpg";
-  var SunImage = "../../media/Sun.png";
-  //PlanetMoons planetMoonColors.length
-for (var i=0; i<planetMoonName.length;i++){
-
-
-if (planetMoonName[i] == 'White Sun' || planetMoonName[i] == 'Georgia' || planetMoonName[i] == 'Red Sun' || planetMoonName[i] == 'Kalidasa'|| planetMoonName[i] == 'Murphy'|| 
-  planetMoonName[i] == 'Lux' || 
-  planetMoonName[i] == 'Qui Shi Huang' || 
-  planetMoonName[i] == 'Himinbjorg' ||
-  planetMoonName[i] == 'Heinlein' || 
-  planetMoonName[i] == 'Penglai'){
-
-    var geometry = new THREE.SphereGeometry( PlanetMoonSize[i]*1.2, 32, 16 );
-  var material = new THREE.MeshBasicMaterial( { color: planetMoonColors[i],map: THREE.ImageUtils.loadTexture( SunImage)} );
-  mesh1 = new THREE.Mesh( geometry, material );
-  mesh1.position.set(planetMoonX[i],planetMoonY[i],planetMoonZ[i]);
-  scene.add(mesh1);
+      // Osiris','Albion','Qui Shi Huang','Lux'];
+      var moonMoonImage = "../../media/MoonMoon.jpg";
+      var SunImage = "../../media/Sun.png";
+      //PlanetMoons planetMoonColors.length
+      for (var i = 0; i < planetMoonName.length; i++) {
+        if (
+          planetMoonName[i] == "White Sun" ||
+          planetMoonName[i] == "Georgia" ||
+          planetMoonName[i] == "Red Sun" ||
+          planetMoonName[i] == "Kalidasa" ||
+          planetMoonName[i] == "Murphy" ||
+          planetMoonName[i] == "Lux" ||
+          planetMoonName[i] == "Qui Shi Huang" ||
+          planetMoonName[i] == "Himinbjorg" ||
+          planetMoonName[i] == "Heinlein" ||
+          planetMoonName[i] == "Penglai"
+        ) {
+          var geometry = new THREE.SphereGeometry(PlanetMoonSize[i] * 1.2, 32, 16);
+          var material = new THREE.MeshBasicMaterial({
+            color: planetMoonColors[i],
+            map: THREE.ImageUtils.loadTexture(SunImage),
+          });
+          mesh1 = new THREE.Mesh(geometry, material);
+          mesh1.position.set(planetMoonX[i], planetMoonY[i], planetMoonZ[i]);
+          scene.add(mesh1);
           var Point1 = new THREE.PointLight(planetMoonColors[i], 1, 200);
-  Point1.position.set(planetMoonX[i],planetMoonY[i],planetMoonZ[i]);
-  mesh1.name = planetMoonName[i];
-  scene.add(Point1);
-    var spriteMaterial3 = new THREE.SpriteMaterial({ 
-    map: new THREE.ImageUtils.loadTexture( '../../media/glow.png' ), 
-    useScreenCoordinates: false, alignment: THREE.SpriteAlignment.center,
-    color: planetMoonColors[i], transparent: false, blending: THREE.AdditiveBlending
-  });
+          Point1.position.set(planetMoonX[i], planetMoonY[i], planetMoonZ[i]);
+          mesh1.name = planetMoonName[i];
+          scene.add(Point1);
+          var spriteMaterial3 = new THREE.SpriteMaterial({
+            map: new THREE.ImageUtils.loadTexture("../../media/glow.png"),
+            useScreenCoordinates: false,
+            alignment: THREE.SpriteAlignment.center,
+            color: planetMoonColors[i],
+            transparent: false,
+            blending: THREE.AdditiveBlending,
+          });
 
-      var spriteMaterialOpaque = new THREE.SpriteMaterial({ 
-    map: new THREE.ImageUtils.loadTexture( '../../media/bigglowy.png' ), 
-    useScreenCoordinates: false, alignment: THREE.SpriteAlignment.center,
-    color: planetMoonColors[i], transparent: false, opacity:.2,blending: THREE.AdditiveBlending
-  });
+          var spriteMaterialOpaque = new THREE.SpriteMaterial({
+            map: new THREE.ImageUtils.loadTexture("../../media/bigglowy.png"),
+            useScreenCoordinates: false,
+            alignment: THREE.SpriteAlignment.center,
+            color: planetMoonColors[i],
+            transparent: false,
+            opacity: 0.2,
+            blending: THREE.AdditiveBlending,
+          });
 
-  var sprite3 = new THREE.Sprite( spriteMaterial3 );
-  sprite3.scale.set((PlanetMoonSize[i]+2)*4, (PlanetMoonSize[i]+2)*4,.2);
-  mesh1.add(sprite3);
+          var sprite3 = new THREE.Sprite(spriteMaterial3);
+          sprite3.scale.set((PlanetMoonSize[i] + 2) * 4, (PlanetMoonSize[i] + 2) * 4, 0.2);
+          mesh1.add(sprite3);
 
-    var sprite4 = new THREE.Sprite( spriteMaterial3 );
-  sprite4.scale.set((PlanetMoonSize[i]+2)*10, (PlanetMoonSize[i]+2)*10, 4);
-  mesh1.add(sprite4);
-    
-}
-else {
-    var geometry = new THREE.SphereGeometry( PlanetMoonSize[i]*1.2, 32, 16 );
-  var material = new THREE.MeshBasicMaterial( { color: planetMoonColors[i],map: THREE.ImageUtils.loadTexture( moonMoonImage)} );
-  mesh1 = new THREE.Mesh( geometry, material );
-  mesh1.position.set(planetMoonX[i],planetMoonY[i],planetMoonZ[i]);
-  scene.add(mesh1);
+          var sprite4 = new THREE.Sprite(spriteMaterial3);
+          sprite4.scale.set((PlanetMoonSize[i] + 2) * 10, (PlanetMoonSize[i] + 2) * 10, 4);
+          mesh1.add(sprite4);
+        } else {
+          var geometry = new THREE.SphereGeometry(PlanetMoonSize[i] * 1.2, 32, 16);
+          var material = new THREE.MeshBasicMaterial({
+            color: planetMoonColors[i],
+            map: THREE.ImageUtils.loadTexture(moonMoonImage),
+          });
+          mesh1 = new THREE.Mesh(geometry, material);
+          mesh1.position.set(planetMoonX[i], planetMoonY[i], planetMoonZ[i]);
+          scene.add(mesh1);
           var Point1 = new THREE.PointLight(planetMoonColors[i], 1, 200);
-  Point1.position.set(planetMoonX[i],planetMoonY[i],planetMoonZ[i]);
-  mesh1.name = planetMoonName[i];
-  scene.add(Point1);
-}
+          Point1.position.set(planetMoonX[i], planetMoonY[i], planetMoonZ[i]);
+          mesh1.name = planetMoonName[i];
+          scene.add(Point1);
+        }
 
-if (planetMoonName[i] == 'White Sun'){
+        if (planetMoonName[i] == "White Sun") {
+          var sprite5 = new THREE.Sprite(spriteMaterialOpaque);
+          sprite5.scale.set((PlanetMoonSize[i] + 2) * 40, (PlanetMoonSize[i] + 2) * 40, 1);
+          mesh1.add(sprite5);
+        }
+      }
 
-      var sprite5 = new THREE.Sprite( spriteMaterialOpaque );
-  sprite5.scale.set((PlanetMoonSize[i]+2)*40, (PlanetMoonSize[i]+2)*40, 1);
-  mesh1.add(sprite5);
-}
-
-}
-
-  ////////////////////////////////////////
-
+      ////////////////////////////////////////
 
       //add camera
-      WIDTH      = window.innerWidth,
-      HEIGHT     = window.innerHeight,
-      VIEW_ANGLE = 45,
-      ASPECT     = WIDTH / HEIGHT,
-      NEAR       = 0.1,
-      FAR        = 10000
-      window.camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR );
-      camera.lookAt( scene.position )
-      camera.position.set( 0, 0, 290 )
+      (WIDTH = window.innerWidth),
+        (HEIGHT = window.innerHeight),
+        (VIEW_ANGLE = 45),
+        (ASPECT = WIDTH / HEIGHT),
+        (NEAR = 0.1),
+        (FAR = 10000);
+      window.camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+      camera.lookAt(scene.position);
+      camera.position.set(0, 0, 290);
       console.log(camera);
 
-  controls = new THREE.OrbitControls( camera, renderer.domElement );
-    controls.minDistance = 50;
-  controls.maxDistance = 700;
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.minDistance = 50;
+      controls.maxDistance = 700;
 
       //initite variables
-      var firstValidFrame = null
-      var cameraRadius = 290
-      var rotateY = 90, rotateX = 0, curY = 0
+      var firstValidFrame = null;
+      var cameraRadius = 290;
+      var rotateY = 90,
+        rotateX = 0,
+        curY = 0;
       var fov = camera.fov;
 
-
       //request animation frame and connect to leap socket
-      Leap.loop({enableGestures: true},function(frame) {
+      Leap.loop({ enableGestures: true }, function (frame) {
         if (frame.valid) {
-
-          if (!firstValidFrame) firstValidFrame = frame
-          var t = firstValidFrame.translation(frame)
+          if (!firstValidFrame) firstValidFrame = frame;
+          var t = firstValidFrame.translation(frame);
 
           //limit y-axis between 0 and 180 degrees
-          curY = map(t[1], -300, 300, 0, 300)
+          curY = map(t[1], -300, 300, 0, 300);
 
           //assign rotation coordinates
-          rotateX = t[0]
-          rotateY = -curY
+          rotateX = t[0];
+          rotateY = -curY;
 
           zoom = Math.max(0, t[2] + 200);
-          zoomFactor = 1/(1 + (zoom / 110));
+          zoomFactor = 1 / (1 + zoom / 110);
 
           //adjust 3D spherical coordinates of the camera
-          camera.position.x = earth.position.x + cameraRadius * Math.sin(rotateY * Math.PI/150) * Math.cos(rotateX * Math.PI/150)
-          camera.position.z = earth.position.y + cameraRadius * Math.sin(rotateY * Math.PI/150) * Math.sin(rotateX * Math.PI/150)
-          camera.position.y = earth.position.z + cameraRadius * Math.cos(rotateY * Math.PI/150)
+          camera.position.x =
+            earth.position.x + cameraRadius * Math.sin((rotateY * Math.PI) / 150) * Math.cos((rotateX * Math.PI) / 150);
+          camera.position.z =
+            earth.position.y + cameraRadius * Math.sin((rotateY * Math.PI) / 150) * Math.sin((rotateX * Math.PI) / 150);
+          camera.position.y = earth.position.z + cameraRadius * Math.cos((rotateY * Math.PI) / 150);
           camera.fov = fov * zoomFactor;
-
         }
 
         camera.updateProjectionMatrix();
-        camera.lookAt(scene.position)
-        renderer.render(scene, camera)
+        camera.lookAt(scene.position);
+        renderer.render(scene, camera);
       });
 
       //window resize method
-      window.addEventListener( 'resize', onWindowResize, false );
-      function onWindowResize(){
-          camera.aspect = window.innerWidth / window.innerHeight;
-          camera.updateProjectionMatrix();
+      window.addEventListener("resize", onWindowResize, false);
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
 
-          renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize(window.innerWidth, window.innerHeight);
       }
 
+      function displaySplines() {
+        ///SPINES///
 
-function displaySplines(){
-  ///SPINES///
+        for (var k = 0; k < planetMoonName.length; k++) {
+          canvas = document.createElement("canvas");
+          context = canvas.getContext("2d");
+          context.font = "Bolder 50px Tangerine";
 
-for (var k =0; k <planetMoonName.length; k++){
+          // get size data (height depends only on font size)
+          var metrics = context.measureText(planetMoonName[k]);
+          var textWidth = metrics.width;
+          // text color
+          context.fillStyle = "rgba(255,232,159,1)";
+          context.fillText(planetMoonName[k], 80, 80);
 
-  canvas = document.createElement('canvas');
-  context = canvas.getContext('2d');
-  context.font = "Bolder 50px Tangerine";
-    
-  // get size data (height depends only on font size)
-  var metrics = context.measureText( planetMoonName[k] );
-  var textWidth = metrics.width;
-  // text color
-  context.fillStyle = "rgba(255,232,159,1)";
-  context.fillText( planetMoonName[k], 80,80);
-  
-  // canvas contents will be used for a texture
-  var texture = new THREE.Texture(canvas) 
-  texture.needsUpdate = true;
+          // canvas contents will be used for a texture
+          var texture = new THREE.Texture(canvas);
+          texture.needsUpdate = true;
 
-  var spriteMaterial = new THREE.SpriteMaterial( 
-    { map: texture, useScreenCoordinates: false } );
-  var sprite = new THREE.Sprite( spriteMaterial );
-  sprite.scale.set(100,50,1.0);
-  sprite.position.set(planetMoonX[k]+5,planetMoonY[k]+5,planetMoonZ[k]);
+          var spriteMaterial = new THREE.SpriteMaterial({ map: texture, useScreenCoordinates: false });
+          var sprite = new THREE.Sprite(spriteMaterial);
+          sprite.scale.set(100, 50, 1.0);
+          sprite.position.set(planetMoonX[k] + 5, planetMoonY[k] + 5, planetMoonZ[k]);
 
-sprite.name = planetMoonName[k]+"Label";
+          sprite.name = planetMoonName[k] + "Label";
 
-if (showPathSplines == true){
-  scene.add(sprite);
-}
+          if (showPathSplines == true) {
+            scene.add(sprite);
+          }
 
-if (showPathSplines == false){
-scene.remove(scene.getObjectByName(sprite.name));
-}
-
-}
-
-}
-function TogglePaths(){
-
-  showPathSplines = !showPathSplines;
-  displaySplines();
-
-}
-
+          if (showPathSplines == false) {
+            scene.remove(scene.getObjectByName(sprite.name));
+          }
+        }
+      }
+      function TogglePaths() {
+        showPathSplines = !showPathSplines;
+        displaySplines();
+      }
     </script>
   </body>
 </html>
-
-

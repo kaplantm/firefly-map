@@ -60,7 +60,7 @@
 
     <link href="http://fonts.googleapis.com/css?family=Tangerine:700" rel="stylesheet" type="text/css" />
     <link href="http://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css" />
-    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="../../dependencies/jquery-1.11.2.min.js"></script>
 
     <!-- ------------------------------------------------------------ -->
 
@@ -657,9 +657,9 @@
       
 		  var centerOffset = splineCount/splineDivisor/2
           var splines = (new Array(splineCount).fill(0)).map((el, k) => new THREE.SplineCurve3([
-            new THREE.Vector3(lineListVector1[j][0]+k/splineDivisor-centerOffset, lineListVector1[j][1]+k/splineDivisor-centerOffset, lineListVector1[j][2]+k/splineDivisor-centerOffset),
-            new THREE.Vector3(lineListVector2[j][0]+k/splineDivisor-centerOffset, lineListVector2[j][1]+k/splineDivisor-centerOffset, lineListVector2[j][2]+k/splineDivisor-centerOffset),
-            new THREE.Vector3(lineListVector3[j][0]+k/splineDivisor-centerOffset, lineListVector3[j][1]+k/splineDivisor-centerOffset, lineListVector3[j][2]+k/splineDivisor-centerOffset),
+            new THREE.Vector3(lineListVector1[j][0]+k/splineDivisor-centerOffset, lineListVector1[j][1]+k/splineDivisor-centerOffset, lineListVector1[j][2]),
+            new THREE.Vector3(lineListVector2[j][0]+k/splineDivisor-centerOffset, lineListVector2[j][1]+k/splineDivisor-centerOffset, lineListVector2[j][2]),
+            new THREE.Vector3(lineListVector3[j][0]+k/splineDivisor-centerOffset, lineListVector3[j][1]+k/splineDivisor-centerOffset, lineListVector3[j][2]),
           ]));
 
           console.log("here 2", splines);
