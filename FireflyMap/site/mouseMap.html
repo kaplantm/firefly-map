@@ -657,9 +657,9 @@
       
 		  var centerOffset = splineCount/splineDivisor/2
           var splines = (new Array(splineCount).fill(0)).map((el, k) => new THREE.SplineCurve3([
-            new THREE.Vector3(lineListVector1[j][0], lineListVector1[j][1]+k/splineDivisor-centerOffset, lineListVector1[j][2]),
-            new THREE.Vector3(lineListVector2[j][0], lineListVector2[j][1]+k/splineDivisor-centerOffset, lineListVector2[j][2]),
-            new THREE.Vector3(lineListVector3[j][0], lineListVector3[j][1]+k/splineDivisor-centerOffset, lineListVector3[j][2]),
+            new THREE.Vector3(lineListVector1[j][0]+k/splineDivisor-centerOffset, lineListVector1[j][1]+k/splineDivisor-centerOffset, lineListVector1[j][2]+k/splineDivisor-centerOffset),
+            new THREE.Vector3(lineListVector2[j][0]+k/splineDivisor-centerOffset, lineListVector2[j][1]+k/splineDivisor-centerOffset, lineListVector2[j][2]+k/splineDivisor-centerOffset),
+            new THREE.Vector3(lineListVector3[j][0]+k/splineDivisor-centerOffset, lineListVector3[j][1]+k/splineDivisor-centerOffset, lineListVector3[j][2]+k/splineDivisor-centerOffset),
           ]));
 
           console.log("here 2", splines);
