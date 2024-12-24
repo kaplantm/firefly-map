@@ -150,7 +150,7 @@ var showPathSplines;
       window.earth = new THREE.Mesh( geometry, material );
       scene.add(earth);
 
-  var imagePrefix = "../../../media/starrybg4.png";
+  var imagePrefix = "../../media/starrybg4.png";
 
   var skyGeometry = new THREE.SphereGeometry( 5000, 32, 16 );
   
@@ -236,8 +236,8 @@ lineListVector3 = [[140,15,0],[-240,-22,45],[140,15,0],[160,60,-30],[200,65,20],
 numPoints = 30;
 
 // Osiris','Albion','Qui Shi Huang','Lux'];
-  var moonMoonImage = "../../../media/MoonMoon.jpg";
-  var SunImage = "../../../media/Sun.png";
+  var moonMoonImage = "../../media/MoonMoon.jpg";
+  var SunImage = "../../media/Sun.png";
   //PlanetMoons planetMoonColors.length
 for (var i=0; i<planetMoonName.length;i++){
 
@@ -259,13 +259,13 @@ if (planetMoonName[i] == 'White Sun' || planetMoonName[i] == 'Georgia' || planet
   mesh1.name = planetMoonName[i];
   scene.add(Point1);
     var spriteMaterial3 = new THREE.SpriteMaterial({ 
-    map: new THREE.ImageUtils.loadTexture( '../../../media/glow.png' ), 
+    map: new THREE.ImageUtils.loadTexture( '../../media/glow.png' ), 
     useScreenCoordinates: false, alignment: THREE.SpriteAlignment.center,
     color: planetMoonColors[i], transparent: false, blending: THREE.AdditiveBlending
   });
 
       var spriteMaterialOpaque = new THREE.SpriteMaterial({ 
-    map: new THREE.ImageUtils.loadTexture( '../../../media/bigglowy.png' ), 
+    map: new THREE.ImageUtils.loadTexture( '../../media/bigglowy.png' ), 
     useScreenCoordinates: false, alignment: THREE.SpriteAlignment.center,
     color: planetMoonColors[i], transparent: false, opacity:.2,blending: THREE.AdditiveBlending
   });
