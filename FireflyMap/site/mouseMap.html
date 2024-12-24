@@ -175,7 +175,7 @@
         scene.add(light);
 
         // SKYBOX
-        var imagePrefix = "../../../media/starrybg.png";
+        var imagePrefix = "../../media/starrybg.png";
 
         var skyGeometry = new THREE.SphereGeometry(5000, 32, 16);
 
@@ -422,8 +422,8 @@
         ];
         numPoints = 30;
 
-        var moonMoonImage = "../../../media/MoonMoon.jpg";
-        var SunImage = "../../../media/Sun.png";
+        var moonMoonImage = "../../media/MoonMoon.jpg";
+        var SunImage = "../../media/Sun.png";
 
         for (var i = 0; i < planetMoonName.length; i++) {
           if (
@@ -451,7 +451,7 @@
             mesh1.name = planetMoonName[i];
             scene.add(Point1);
             var spriteMaterial3 = new THREE.SpriteMaterial({
-              map: new THREE.ImageUtils.loadTexture("../../../media/glow.png"),
+              map: new THREE.ImageUtils.loadTexture("../../media/glow.png"),
               useScreenCoordinates: false,
               alignment: THREE.SpriteAlignment.center,
               color: planetMoonColors[i],
@@ -460,7 +460,7 @@
             });
 
             var spriteMaterialOpaque = new THREE.SpriteMaterial({
-              map: new THREE.ImageUtils.loadTexture("../../../media/bigglowy.png"),
+              map: new THREE.ImageUtils.loadTexture("../../media/bigglowy.png"),
               useScreenCoordinates: false,
               alignment: THREE.SpriteAlignment.center,
               color: planetMoonColors[i],
