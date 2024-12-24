@@ -74,6 +74,7 @@
     <div
       id="top"
       style="
+        pointer-events: none;
         position: absolute;
         top: 35px;
         left: 27%;
@@ -550,7 +551,7 @@
           $(".hidden").animate({ width: "98%" });
           $(".hidden").html(
             "<span id='NameLabel'>" +
-				getName(INTERSECTED.name)  +
+              getName(INTERSECTED.name) +
               "</span><br><span id='InfoLabel'>" +
               textTexture[planetMoonName.indexOf(getName(INTERSECTED.name))] +
               "</span>"
